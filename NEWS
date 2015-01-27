@@ -1,5 +1,10 @@
 NEWS for the Gmisc package
 
+Changes for 1.0.3
+-----------------
+* Added a converter for tableone objects (an alternative package dedicated for 
+  generating the "Table 1")
+
 Changes for 1.0.1
 -----------------
 * Added ability to customize statistics for getDescriptionStatsBy

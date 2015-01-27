@@ -1,5 +1,5 @@
 Package: Gmisc
-Version: 1.0.1
+Version: 1.0.3
 Date: 2015-01-18
 Title: Descriptive Statistics, Transition Plots, and More
 Author: Max Gordon <max@gforge.se>
@@ -20,7 +20,9 @@ Imports:
     grid,
     lattice,
     sp,
+    stringr,
     Hmisc,
+    tableone,
     forestplot
 Suggests:
     testthat,
