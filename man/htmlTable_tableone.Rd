@@ -19,6 +19,9 @@
   \item{...}{Passed onto
   \code{\link[htmlTable]{htmlTable}}}
 
+  \item{css.rgroup}{Overrides the default bold text. See
+  \code{\link[htmlTable]{htmlTable}} for details.}
+
   \item{t1_args}{Arguments passed to the
   \code{\link[tableone]{print.TableOne}}}
 }

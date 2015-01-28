@@ -8,13 +8,13 @@
 #' @param x The TableOne object
 #' @param ... Passed onto \code{\link[htmlTable]{htmlTable}}
 #' @param t1_args Arguments passed to the \code{\link[tableone]{print.TableOne}}
+#' @param css.rgroup Overrides the default bold text. See \code{\link[htmlTable]{htmlTable}} for details.
 #' @return Returns an \code{\link[htmlTable]{htmlTable}} object
 #' @rdname htmlTable_tableone
 #' @export
 #' @import htmlTable
 #' @import tableone
 #' @importFrom stringr str_trim
-#' @inheritParams htmlTable
 htmlTable.TableOne <- function(x, 
                                ..., 
                                css.rgroup = "", 
@@ -42,11 +42,13 @@ htmlTable.TableOne <- function(x,
 }
 
 #' @rdname htmlTable_tableone
+#' @keywords internal
 htmlTable.CatTable <- function(...){
   return(htmlTable.TableOne(...))
 }
 
 #' @rdname htmlTable_tableone
+#' @keywords internal
 htmlTable.ContTable <- function(...){
   return(htmlTable.TableOne(...))
 }
