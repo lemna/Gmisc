@@ -35,4 +35,5 @@ The function uses the raw output from the
 \code{print.TableOne} and looks for \code{header},
 \code{rgroup}, and \code{n.rgroup} elements.
 }
+\keyword{internal}
 
