@@ -24,9 +24,11 @@ Imports:
     Hmisc,
     forestplot,
     knitr,
+    stringr,
     magrittr
 Suggests:
-    testthat
+    testthat,
+    survival
 Roxygen: list(wrap = TRUE)
 Encoding: UTF-8
 NeedsCompilation: no
