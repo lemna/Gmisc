@@ -2,8 +2,14 @@ NEWS for the Gmisc package
 
 Changes for 1.0.3
 -----------------
-* Added a converter for tableone objects (an alternative package dedicated for 
+* Added a converter for tableone objects (an alternative package dedicated for
   generating the "Table 1")
+
+Changes for 1.0.2
+-----------------
+* The bezier arrows have been rewritten with a > 20x speed increase
+* The getDescriptionStatsBy function is now accompanied by mergeDesc that takes care of merging
+  everything into one table
 
 Changes for 1.0.1
 -----------------
