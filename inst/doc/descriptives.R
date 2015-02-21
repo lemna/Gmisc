@@ -79,7 +79,8 @@ mergeDesc(getTable1Stats(mtcars$mpg),
 ## ----, warning=FALSE-----------------------------------------------------
 getTable1Stats <- function(x, digits = 0, ...){
   getDescriptionStatsBy(x = x, 
-                        by = mtcars$am,
+                        by = "am",
+                        data = mtcars,
                         digits = digits,
                         continuous_fn = describeMedian,
                         header_count = TRUE,
@@ -90,17 +91,17 @@ getTable1Stats <- function(x, digits = 0, ...){
 
 t1 <- list()
 t1[["Gas"]] <-
-  getTable1Stats(mtcars$mpg)
+  getTable1Stats("mpg")
   
 t1[["Weight&dagger;"]] <-
-  getTable1Stats(mtcars$wt)
+  getTable1Stats("wt")
 
 t1[["Color"]] <- 
-  getTable1Stats(mtcars$col)
+  getTable1Stats("col")
 
 library(magrittr)
 mergeDesc(t1,
-          getTable1Stats(mtcars$gear)) %>%
+          getTable1Stats("gear")) %>%
   htmlTable(css.rgroup = "",
             caption  = "Basic descriptive statistics from the mtcars dataset",
             tfoot = "&dagger; The weight is in 10<sup>3</sup> kg")
@@ -134,4 +135,16 @@ mergeDesc(t1,
   htmlTable(css.rgroup = "",
             caption  = "P-values generated from a custom set of values",
             tfoot = "&dagger; The weight is in 10<sup>3</sup> kg")
+
+## ------------------------------------------------------------------------
+library(tableone)
+t1 <- CreateTableOne(c("mpg", "wt", "col", "gear"), 
+                     strata = "am", 
+                     data = mtcars)
+
+htmlTable(t1, 
+          # Arguments passed to the print.TableOne
+          t1_args = list(catDigits = 0, 
+                         contDigits = 1),
+          caption  = "A tableone-based example")
 
