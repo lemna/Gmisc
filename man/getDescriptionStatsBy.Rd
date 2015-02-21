@@ -4,7 +4,7 @@
 \alias{getDescriptionStatsBy}
 \title{Creating of description statistics}
 \usage{
-getDescriptionStatsBy(x, by, digits = 1, html = TRUE,
+getDescriptionStatsBy(x, by, data, digits = 1, html = TRUE,
   numbers_first = TRUE, statistics = FALSE, statistics.sig_lim = 10^-4,
   statistics.two_dec_lim = 10^-2, useNA = c("ifany", "no", "always"),
   useNA.digits = digits, continuous_fn = describeMean,
@@ -18,6 +18,10 @@ getDescriptionStatsBy(x, by, digits = 1, html = TRUE,
 
   \item{by}{The variable that you want to split into
   different columns}
+
+  \item{data}{A data.frame from which the variable \code{x}
+  and \code{by} are selected. If x/by are vectors this
+  argument is ignored.}
 
   \item{digits}{The number of decimals used}
 

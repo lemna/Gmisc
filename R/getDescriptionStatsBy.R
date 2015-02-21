@@ -26,6 +26,8 @@
 #' @param x The variable that you want the statistics for
 #' @param by The variable that you want to split into different
 #'  columns
+#' @param data A data.frame from which the variable \code{x} and \code{by} are selected.
+#'  If x/by are vectors this argument is ignored.
 #' @param digits The number of decimals used
 #' @param html If HTML compatible output should be used. If \code{FALSE}
 #'  it outputs LaTeX formatting
@@ -100,6 +102,7 @@
 #' @export
 getDescriptionStatsBy <- function(x,
                                   by,
+                                  data,
                                   digits=1,
                                   html = TRUE,
                                   numbers_first = TRUE,
@@ -144,6 +147,16 @@ getDescriptionStatsBy <- function(x,
              " and the new parameter name: '", new_name, "'.")
       }
     }
+  }
+
+  # Convert any variable names to actual vectors
+  if (!missing(data)){
+    if (length(x) == 1 &&
+          is.character(x))
+      x <- data[[x]]
+    if (length(by) == 1 &&
+          is.character(by))
+      by <- data[[by]]
   }
 
   useNA <- match.arg(useNA)
