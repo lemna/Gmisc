@@ -80,7 +80,6 @@
 #'  default it is \code{FALSE}.
 #' @return void
 #' @examples
-#' \dontrun{
 #' # This example does not run since it
 #' # takes a little while to assemble the
 #' # arrows and RMD Check complains that this
@@ -122,8 +121,8 @@
 #'                max_lwd = unit(10, "mm"),
 #'                overlap_add_width = unit(1, "mm"))
 #' par(par_org)
-#' }
 #' @import grid
+#' @import magrittr
 #' @export
 transitionPlot <- function (transition_flow,
                             type_of_arrow = c("grid", "simple", "gradient"),
@@ -152,7 +151,7 @@ transitionPlot <- function (transition_flow,
                             color_bar = TRUE,
                             color_bar_cex = cex * .33,
                             color_bar_labels,
-                            color_bar_subspace,
+                            color_bar_subspace = NULL,
                             new_page = FALSE) {
   # Just for convenience
   no_boxes <- nrow(transition_flow)

@@ -86,7 +86,7 @@ transitionPlot(trn_mtrx,
                box_label = c("Before", "After"),
                box_txt = box_txt,
                cex = 1.2,
-               type_of_arrow = "gradient")
+               type_of_arrow = "simple")
 
 ## ----, echo=FALSE--------------------------------------------------------
 knitr::opts_chunk$set(fig.height = 5.5)

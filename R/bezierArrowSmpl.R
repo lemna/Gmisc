@@ -13,10 +13,13 @@
 #' \code{\link{bezierGrob}} function.
 #' @param align_2_axis Indicates if the arrow should be vertically/horizontally
 #'  aligned. This is useful for instance if the arrow attaches to a box.
+#' @param rez The resolution of the arrow. This specifies how many points to retrieve from the
+#'  \code{\link{gnrlBezierPoints}} function. Defaults to 200.
 #' @param name A character identifier.
 #' @return \code{grid::grob} A grob of the class polygonGrob with attributes that
 #'  correspond to the bezier points.
 #'
+#' @inheritParams calculateLinesAndArrow
 #' @examples
 #' library(grid)
 #' grid.newpage()
@@ -31,23 +34,42 @@ bezierArrowSmpl <- function(x = c(0.2, .7, .3, .9),
                             width = .05,
                             clr = "#000000",
                             default.units = "npc",
-                            arrow = list(base = unit(.1, "snpc"),
-                                         length = unit(.1, "snpc")),
+                            arrow = list(),
+                            rez = 200,
                             align_2_axis = TRUE,
                             name = NULL,
+                            rm_intersect = 3L,
                             gp = gpar(), vp = NULL){
   if (class(x) != "unit")
     x <- unit(x, default.units)
   if (class(y) != "unit")
     y <- unit(y, default.units)
-  if (class(arrow$base) != "unit")
-    arrow$base <- unit(arrow$base, default.units)
-  if (class(arrow$length) != "unit")
-    arrow$length <- unit(arrow$length, default.units)
-  if (class(width) != "unit")
-    width <- unit(width, default.units)
 
-  if (length(y) != length(x))
+  width <- getAbsoluteWidth(w = width,
+                            default.units = default.units,
+                            x = x,
+                            y = y)
+  if (!"base" %in% names(arrow)){
+    arrow$base <- unit(getGridVal(width, "mm")*2, "mm")
+  }
+  if (!"length" %in% names(arrow)){
+    sqFn <- function(vals, axis){
+      (getGridVal(vals[1], default.units = "mm", axisTo = axis)-
+         getGridVal(tail(vals, 1), default.units = "mm", axisTo = axis))^2
+    }
+    arrow$length <- unit(sqrt(sqFn(x, "x") + sqFn(y, "y"))*.1, "mm")
+  }
+
+  arrow$base <- getAbsoluteWidth(w = arrow$base,
+                                 default.units = default.units,
+                                 x = x,
+                                 y = y)
+  arrow$length <- getAbsoluteWidth(w = arrow$length,
+                                   default.units = default.units,
+                                   x = x,
+                                   y = y)
+
+    if (length(y) != length(x))
     stop("You have provided unequal lengths to y and x - thus uninterpretable:",
          " y=", length(y), " elements",
          " while x=", length(x), " elements")
@@ -65,7 +87,6 @@ bezierArrowSmpl <- function(x = c(0.2, .7, .3, .9),
   arrow$length <- convertX(arrow$length, unitTo = internal.units, valueOnly = TRUE)
   arrow$base <- convertX(arrow$base, unitTo = internal.units, valueOnly = TRUE)
 
-
   # According to the original description they're all spline
   # control points but as I want the line to start and end
   # at specific points then this makes sense to me
@@ -77,7 +98,7 @@ bezierArrowSmpl <- function(x = c(0.2, .7, .3, .9),
   new_bp <-
     getBezierAdj4Arrw(x = x, y = y,
                       arrow_length = arrow$length,
-                      length_out = 200)
+                      length_out = rez)
 
   # Get lengths
   new_bp$lengths <-
@@ -97,7 +118,8 @@ bezierArrowSmpl <- function(x = c(0.2, .7, .3, .9),
                                   offset = width/2,
                                   end_x = end_points$end$x,
                                   end_y = end_points$end$y,
-                                  arrow_offset = arrow$base/2)
+                                  arrow_offset = arrow$base/2,
+                                  rm_intersect = rm_intersect)
 
   if (align_2_axis != FALSE){
     lines <- align2Axis(bp = new_bp,

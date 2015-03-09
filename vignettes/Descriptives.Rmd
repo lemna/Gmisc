@@ -1,5 +1,5 @@
 ---
-title: "The fastest way to compile table 1?"
+title: "The fastest way to compile your Table 1?"
 author: "Max Gordon"
 date: "`r Sys.Date()`"
 output: 
@@ -7,7 +7,7 @@ output:
     toc: true
     css: custom.css
 vignette: >
-  %\VignetteIndexEntry{Gmisc for generating descriptive statistics}
+  %\VignetteIndexEntry{Descriptives statistics for Table 1}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---

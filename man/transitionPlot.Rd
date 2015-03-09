@@ -16,7 +16,7 @@ transitionPlot(transition_flow, type_of_arrow = c("grid", "simple",
   box_prop, mar = unit(rep(3, times = 4), "mm"), main = NULL,
   box_label = NULL, box_label_pos = "top", box_label_cex = cex,
   color_bar = TRUE, color_bar_cex = cex * 0.33, color_bar_labels,
-  color_bar_subspace, new_page = FALSE)
+  color_bar_subspace = NULL, new_page = FALSE)
 }
 \arguments{
   \item{transition_flow}{This should be a matrix with the
@@ -165,7 +165,6 @@ surgery but it can be used in any situation where you have
 a change from one state to another
 }
 \examples{
-\dontrun{
 # This example does not run since it
 # takes a little while to assemble the
 # arrows and RMD Check complains that this
@@ -207,6 +206,5 @@ transitionPlot(transition_matrix, box_prop=box_prop,
                max_lwd = unit(10, "mm"),
                overlap_add_width = unit(1, "mm"))
 par(par_org)
-}
 }
 
