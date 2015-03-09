@@ -81,6 +81,7 @@ prGetTableoneRgroups <- function(t1){
       names(x) = p_col
       x
     })
+    names(add) = rownames(t1)[rgroup_rows]
 
   }else{
     add <- NULL
